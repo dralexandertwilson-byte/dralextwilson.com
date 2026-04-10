@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alexander T. Wilson, MD, PhD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ── Reset ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 17px; }
+
+/* ── Design Tokens ─────────────────────────────────── */
+:root {
+  --cream:       #F5F0E8;
+  --cream-mid:   #EDE8DF;
+  --cream-deep:  #E0DAD0;
+  --charcoal:    #1A1816;
+  --warm-gray:   #7A7068;
+  --light-gray:  #B5ADA5;
+  --bronze:      #8C7B5E;
+  --bronze-light:#A89880;
+  --bronze-pale: #E8E2D8;
+  --stone:       #3A3632;
+  --stone-light: #5A5550;
+  --rule:        rgba(26,24,22,.08);
+  --serif:       'Cormorant Garamond', Georgia, serif;
+  --sans:        'Inter', system-ui, sans-serif;
+}
+
+/* ── Base ──────────────────────────────────────────── */
+body {
+  font-family: var(--sans);
+  background: var(--cream);
+  color: var(--charcoal);
+  line-height: 1.75;
+  font-weight: 300;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+p { margin-bottom: 1.1em; }
+p:last-child { margin-bottom: 0; }
+
+/* ── Typography ────────────────────────────────────── */
+.label {
+  font-family: var(--sans);
+  font-size: .8rem;
+  font-weight: 500;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--bronze);
+}
+.serif-display {
+  font-family: var(--serif);
+  font-weight: 300;
+  line-height: 1.1;
+}
+.body-copy {
+  font-size: 1.05rem;
+  color: var(--warm-gray);
+  line-height: 1.85;
+  font-weight: 300;
+}
+
+/* ── Layout ─────────────────────────────────────────── */
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 3rem; }
+.wrap--narrow { max-width: 720px; margin: 0 auto; padding: 0 3rem; }
+.wrap--wide { max-width: 1280px; margin: 0 auto; padding: 0 3rem; }
+
+/* ── Thin rule ──────────────────────────────────────── */
+.thin-rule {
+  border: none;
+  border-top: 1px solid var(--rule);
+}
+
+/* ══ NAV ════════════════════════════════════════════ */
+#nav {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.6rem 3rem;
+  transition: background .5s, padding .4s;
+}
+#nav.pinned {
+  background: rgba(245,240,232,.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 1.1rem 3rem;
+  border-bottom: 1px solid var(--rule);
+}
+.nav-wordmark {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 400;
+  letter-spacing: .04em;
+  color: var(--cream);
+  transition: color .5s;
+}
+#nav.pinned .nav-wordmark { color: var(--charcoal); }
+.nav-cred {
+  font-size: .72rem;
+  font-family: var(--sans);
+  font-weight: 300;
+  letter-spacing: .03em;
+  opacity: .6;
+}
+
+/* ── Headshot ── */
+.headshot-wrap {
+  width: 100%; aspect-ratio: 4/5;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+}
+.headshot-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: grayscale(8%) contrast(1.02);
+}
+.nav-list {
+  display: flex; gap: 2.5rem; list-style: none;
+}
+.nav-list a {
+  font-size: .8rem;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.65);
+  transition: color .3s;
+}
+#nav.pinned .nav-list a { color: var(--warm-gray); }
+.nav-list a:hover { color: var(--bronze-light); }
+#nav.pinned .nav-list a:hover { color: var(--bronze); }
+.nav-toggle {
+  display: none;
+  background: none; border: none;
+  cursor: pointer;
+  flex-direction: column; gap: 5px;
+  padding: 4px;
+}
+.nav-toggle span {
+  display: block; width: 20px; height: 1px;
+  background: rgba(255,255,255,.7);
+  transition: background .3s;
+}
+#nav.pinned .nav-toggle span { background: var(--charcoal); }
+
+/* ══ HERO ═══════════════════════════════════════════ */
+.hero {
+  height: 100vh; min-height: 680px;
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 3rem 5rem;
+  position: relative;
+  background: var(--charcoal) url('Homepage.jpg') center center / cover no-repeat;
+  overflow: hidden;
+}
+
+/* Dark gradient overlay for text legibility */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to top, rgba(26,24,22,.90) 0%, rgba(26,24,22,.50) 40%, rgba(26,24,22,.18) 70%, rgba(26,24,22,.08) 100%);
+}
+
+/* Subtle warm tint */
+.hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(140,123,94,.08) 0%, transparent 40%);
+}
+
+.hero-inner {
+  position: relative; z-index: 2;
+  max-width: 1080px; margin: 0 auto; width: 100%;
+}
+.hero-eyebrow {
+  font-family: var(--sans);
+  font-size: .9rem; font-weight: 500;
+  letter-spacing: .3em; text-transform: uppercase;
+  color: var(--bronze-light);
+  margin-bottom: 1.8rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block; width: 36px; height: 1px;
+  background: var(--bronze-light);
+}
+.hero-name {
+  font-family: var(--serif);
+  font-size: clamp(3.4rem, 7vw, 5.8rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.05;
+  letter-spacing: .03em;
+  margin-bottom: .5rem;
+}
+.hero-degree {
+  font-family: var(--serif);
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  font-weight: 300;
+  color: rgba(248,244,238,.85);
+  letter-spacing: .12em;
+  margin-bottom: 2.5rem;
+}
+.hero-tagline {
+  font-size: 1rem; font-weight: 300;
+  color: rgba(248,244,238,.45);
+  letter-spacing: .04em;
+  max-width: 500px;
+  line-height: 1.8;
+}
+.hero-scroll {
+  position: absolute; bottom: 3rem; right: 3rem;
+  display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  z-index: 2;
+}
+.hero-scroll span {
+  font-size: .58rem; letter-spacing: .25em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.2);
+  writing-mode: vertical-rl;
+}
+.hero-scroll::after {
+  content: '';
+  display: block; width: 1px; height: 50px;
+  background: linear-gradient(to bottom, rgba(140,123,94,.4), transparent);
+}
+
+/* ══ SECTION SPACING ════════════════════════════════ */
+.section { padding: 9rem 0; }
+.section--alt { background: var(--cream-mid); }
+.section--dark {
+  background: var(--charcoal);
+  color: var(--cream);
+}
+.section--dark .body-copy { color: rgba(248,244,238,.5); }
+.section--dark .thin-rule { border-color: rgba(248,244,238,.07); }
+
+.section-header { margin-bottom: 5rem; }
+.section-header .label { margin-bottom: 1.2rem; }
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--charcoal);
+}
+.section--dark .section-title { color: var(--cream); }
+
+/* ══ ABOUT ══════════════════════════════════════════ */
+.about-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 6rem;
+  align-items: start;
+}
+.about-pull {
+  font-family: var(--serif);
+  font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+  font-weight: 300;
+  color: var(--charcoal);
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+.about-pull em {
+  font-style: italic;
+  color: var(--bronze);
+}
+.stat-trio {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 2px;
+  margin-top: 3.5rem;
+  border: 1px solid var(--rule);
+}
+.stat-cell {
+  padding: 2rem 1.5rem;
+  text-align: center;
+  border-right: 1px solid var(--rule);
+}
+.stat-cell:last-child { border-right: none; }
+.stat-n {
+  font-family: var(--serif);
+  font-size: 2.8rem;
+  font-weight: 300;
+  color: var(--bronze);
+  line-height: 1;
+}
+.stat-l {
+  font-size: .72rem; letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--light-gray);
+  margin-top: .4rem;
+}
+.credential-stack { display: flex; flex-direction: column; gap: 0; }
+.cred-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  padding: 1.6rem 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+}
+.cred-row:first-child { border-top: 1px solid var(--rule); }
+.cred-inst {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--charcoal);
+}
+.cred-degree {
+  font-size: .85rem; font-weight: 400;
+  color: var(--bronze);
+  letter-spacing: .03em;
+}
+.cred-note {
+  font-size: .88rem;
+  color: var(--light-gray);
+  margin-top: .2rem;
+}
+.cred-year {
+  font-size: .8rem; font-weight: 500;
+  letter-spacing: .1em;
+  color: var(--light-gray);
+  text-align: right; white-space: nowrap;
+}
+
+/* ══ PHILOSOPHY / FULL-BLEED QUOTE ══════════════════ */
+.interlude {
+  padding: 7rem 3rem;
+  background: var(--charcoal);
+  text-align: center;
+}
+.interlude-quote {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--cream);
+  max-width: 780px; margin: 0 auto;
+  line-height: 1.5;
+}
+.interlude-attr {
+  margin-top: 2rem;
+  font-size: .65rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--bronze-light);
+}
+
+/* ══ EXPERTISE ══════════════════════════════════════ */
+.expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+.exp-item {
+  padding: 3rem 2.5rem;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  transition: background .3s;
+}
+.exp-item:nth-child(3n) { border-right: none; }
+.exp-item:last-child { border-bottom: none; }
+.exp-item:hover { background: var(--cream-mid); }
+.exp-num {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  color: var(--bronze-light);
+  margin-bottom: 1.5rem;
+}
+.exp-title {
+  font-family: var(--serif);
+  font-size: 1.45rem;
+  font-weight: 400;
+  color: var(--charcoal);
+  margin-bottom: .75rem;
+  line-height: 1.3;
+}
+.exp-body {
+  font-size: 1rem;
+  color: var(--warm-gray);
+  line-height: 1.8;
+  font-weight: 300;
+}
+.exp-border-top { border-top: 1px solid var(--rule); }
+
+/* ══ TIMELINE ═══════════════════════════════════════ */
+.journey-layout {
+  display: grid;
+  grid-template-columns: 1fr 2px 1fr;
+  gap: 0;
+}
+.journey-spine { background: var(--rule); }
+.journey-col { padding: 0 4rem; }
+.journey-col--right { padding-top: 5rem; }
+.tl-entry {
+  padding-bottom: 3.5rem;
+  margin-bottom: .5rem;
+  position: relative;
+}
+.tl-entry::after {
+  content: '';
+  position: absolute;
+  right: -4rem; top: .45rem;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--bronze);
+  transform: translateX(50%);
+}
+.journey-col--right .tl-entry::after {
+  right: auto; left: -4rem;
+  transform: translateX(-50%);
+}
+.tl-period {
+  font-size: .72rem; font-weight: 500;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--bronze); margin-bottom: .5rem;
+}
+.tl-heading {
+  font-family: var(--serif);
+  font-size: 1.25rem; font-weight: 400;
+  color: var(--charcoal);
+  margin-bottom: .4rem;
+}
+.tl-body {
+  font-size: .92rem;
+  color: var(--warm-gray);
+  line-height: 1.8;
+}
+
+/* ══ RESEARCH TABS ═══════════════════════════════════ */
+.research-top {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 6rem;
+  align-items: start;
+  margin-bottom: 5rem;
+}
+.tab-rail {
+  display: flex; flex-direction: column; gap: 0;
+  border: 1px solid var(--rule);
+  margin-top: 2.5rem;
+}
+.tab-btn {
+  background: none; border: none;
+  padding: 1.1rem 1.5rem;
+  text-align: left;
+  font-family: var(--sans);
+  font-size: .72rem; font-weight: 500;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--warm-gray);
+  cursor: pointer;
+  transition: all .25s;
+  border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center; gap: .75rem;
+}
+.tab-btn:last-child { border-bottom: none; }
+.tab-btn.active {
+  background: var(--stone);
+  color: var(--cream);
+}
+.tab-btn::before {
+  content: attr(data-n);
+  font-family: var(--serif);
+  font-size: .8rem;
+  color: var(--bronze-light);
+  min-width: 1.2rem;
+}
+.tab-btn.active::before { color: rgba(248,244,238,.45); }
+.pub-panel { display: none; }
+.pub-panel.active { display: block; }
+.pub-entry {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.pub-entry:first-child { padding-top: 0; }
+.pub-entry:last-child { border-bottom: none; }
+.pub-title {
+  font-family: var(--serif);
+  font-size: 1.02rem; font-weight: 400;
+  color: var(--charcoal);
+  line-height: 1.45; margin-bottom: .3rem;
+}
+.pub-meta {
+  font-size: .9rem;
+  color: var(--bronze);
+  font-style: italic;
+}
+.pub-year {
+  font-size: .85rem;
+  color: var(--light-gray);
+  margin-top: .15rem;
+}
+
+/* ══ PRESENTATIONS ══════════════════════════════════ */
+.pres-table { width: 100%; border-collapse: collapse; margin-top: 3.5rem; }
+.pres-table tr { border-bottom: 1px solid var(--rule); transition: background .2s; }
+.pres-table tr:hover { background: var(--cream-mid); }
+.pres-table td {
+  padding: 1.6rem 1rem;
+  vertical-align: top;
+  font-size: .85rem;
+}
+.pres-table td:first-child { padding-left: 0; }
+.pres-table td:last-child { padding-right: 0; }
+.pres-year-cell {
+  font-size: .67rem; font-weight: 500;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--bronze);
+  white-space: nowrap;
+  width: 70px;
+}
+.pres-venue-cell {
+  color: var(--warm-gray);
+  font-size: .78rem;
+  width: 220px;
+}
+.pres-title-cell {
+  font-family: var(--serif);
+  font-size: 1rem; font-weight: 400;
+  color: var(--charcoal);
+  line-height: 1.4;
+}
+.pres-loc-cell {
+  color: var(--light-gray);
+  font-size: .75rem;
+  white-space: nowrap;
+  text-align: right;
+}
+
+/* ══ AWARDS (dark) ══════════════════════════════════ */
+.awards-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 0;
+  margin-top: 3.5rem;
+}
+.award-cell {
+  padding: 2.5rem;
+  border-right: 1px solid rgba(248,244,238,.07);
+  border-bottom: 1px solid rgba(248,244,238,.07);
+  transition: background .3s;
+}
+.award-cell:hover { background: rgba(140,123,94,.06); }
+.award-cell:nth-child(3n) { border-right: none; }
+.award-cell:nth-child(n+4) { border-bottom: none; }
+.award-yr {
+  font-size: .62rem; letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--bronze-light);
+  margin-bottom: .6rem;
+}
+.award-name {
+  font-family: var(--serif);
+  font-size: 1.1rem; font-weight: 300;
+  color: var(--cream);
+  margin-bottom: .3rem;
+  line-height: 1.35;
+}
+.award-org {
+  font-size: .76rem;
+  color: rgba(248,244,238,.3);
+}
+
+/* ══ MARQUEE BAND (shared) ═══════════════════════════ */
+.marquee-band {
+  padding: 4rem 0;
+  overflow: hidden;
+  position: relative;
+}
+.marquee-band--dark { background: var(--stone); }
+.marquee-band--light { background: var(--cream-mid); }
+.marquee-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: marquee-scroll 35s linear infinite;
+}
+.marquee-band:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-item {
+  display: flex; flex-direction: column;
+  align-items: center; gap: .6rem;
+  text-align: center;
+  flex-shrink: 0;
+  padding: 0 5rem;
+}
+.marquee-item img {
+  height: 75px;
+  width: auto;
+  object-fit: contain;
+}
+.marquee-band--dark .marquee-item img {
+  filter: brightness(0) invert(1);
+  opacity: .75;
+}
+.marquee-band--light .marquee-item img {
+  opacity: .8;
+}
+.marquee-item span {
+  font-size: .68rem; letter-spacing: .18em;
+  text-transform: uppercase;
+  font-weight: 500;
+  line-height: 1.6;
+  max-width: 180px;
+}
+.marquee-band--dark .marquee-item span {
+  color: rgba(248,244,238,.45);
+}
+.marquee-band--light .marquee-item span {
+  color: var(--warm-gray);
+}
+/* Fade edges */
+.marquee-band::before,
+.marquee-band::after {
+  content: '';
+  position: absolute; top: 0; bottom: 0;
+  width: 80px; z-index: 2;
+  pointer-events: none;
+}
+.marquee-band--dark::before { left: 0; background: linear-gradient(to right, var(--stone), transparent); }
+.marquee-band--dark::after { right: 0; background: linear-gradient(to left, var(--stone), transparent); }
+.marquee-band--light::before { left: 0; background: linear-gradient(to right, var(--cream-mid), transparent); }
+.marquee-band--light::after { right: 0; background: linear-gradient(to left, var(--cream-mid), transparent); }
+
+/* ══ CONTACT ════════════════════════════════════════ */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7rem;
+  align-items: start;
+}
+.contact-lead {
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  font-weight: 300;
+  color: var(--charcoal);
+  line-height: 1.45;
+  margin-bottom: 2rem;
+}
+.contact-detail {
+  display: flex; align-items: baseline; gap: .75rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.contact-detail:last-child { border-bottom: none; }
+.contact-key {
+  font-size: .72rem; font-weight: 500;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--bronze);
+  min-width: 80px;
+}
+.contact-val {
+  font-size: .95rem;
+  color: var(--warm-gray);
+  font-weight: 300;
+}
+/* Form */
+.form-field { margin-bottom: 1.6rem; }
+.form-field label {
+  display: block;
+  font-size: .8rem; font-weight: 500;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--warm-gray);
+  margin-bottom: .5rem;
+}
+.form-field input,
+.form-field textarea {
+  width: 100%; padding: .85rem 0;
+  background: transparent;
+  border: none; border-bottom: 1px solid var(--rule);
+  font-family: var(--sans);
+  font-size: 1rem; font-weight: 300;
+  color: var(--charcoal);
+  outline: none;
+  transition: border-color .25s;
+  border-radius: 0;
+}
+.form-field input:focus { border-color: var(--bronze); }
+.form-field textarea:focus { border-color: var(--bronze); }
+.form-field textarea { resize: vertical; min-height: 100px; }
+.btn-send {
+  display: inline-flex; align-items: center; gap: .75rem;
+  background: none;
+  border: 1px solid var(--stone);
+  padding: .9rem 2.2rem;
+  font-family: var(--sans);
+  font-size: .82rem; font-weight: 500;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--stone);
+  cursor: pointer;
+  transition: all .3s;
+}
+.btn-send:hover {
+  background: var(--charcoal);
+  color: var(--cream);
+}
+
+/* ══ FOOTER ═════════════════════════════════════════ */
+footer {
+  background: var(--charcoal);
+  padding: 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+}
+.foot-brand {
+  font-family: var(--serif);
+  font-size: 1rem; font-weight: 400;
+  color: rgba(248,244,238,.45);
+  letter-spacing: .04em;
+  display: flex; align-items: center; gap: 1rem;
+}
+.foot-copy {
+  font-size: .75rem; letter-spacing: .12em;
+  color: rgba(248,244,238,.2);
+  text-transform: uppercase;
+}
+
+/* ── Phi Mark ──────────────────────────────────────── */
+.phi-mark { display: inline-block; vertical-align: middle; }
+.phi-mark--nav { opacity: .85; transition: opacity .3s; margin-right: .25rem; }
+#nav.pinned .phi-mark--nav { opacity: 1; }
+.phi-mark--nav svg { width: 16px; height: 21px; }
+.phi-mark--section { opacity: .7; margin-right: .6rem; }
+.phi-mark--section svg { width: 14px; height: 14px; }
+.label-with-phi {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+.label-with-phi .label { margin-bottom: 0; }
+.phi-mark--interlude { opacity: .65; margin-bottom: 2rem; }
+.phi-mark--interlude svg { width: 32px; height: 42px; }
+.phi-mark--footer { opacity: .85; }
+.phi-mark--footer svg { width: 24px; height: 32px; }
+
+/* ══ FADE-IN ════════════════════════════════════════ */
+.reveal {
+  opacity: 0; transform: translateY(22px);
+  transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1);
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: .1s; }
+.reveal-delay-2 { transition-delay: .2s; }
+.reveal-delay-3 { transition-delay: .3s; }
+
+/* ══ RESPONSIVE ═════════════════════════════════════ */
+@media (max-width: 960px) {
+  .wrap, .wrap--narrow, .wrap--wide { padding: 0 2rem; }
+  #nav { padding: 1.4rem 2rem; }
+  #nav.pinned { padding: 1rem 2rem; }
+  .about-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .expertise-grid { grid-template-columns: 1fr 1fr; }
+  .exp-item:nth-child(3n) { border-right: 1px solid var(--rule); }
+  .exp-item:nth-child(2n) { border-right: none; }
+  .exp-item:nth-child(n+4) { border-bottom: 1px solid var(--rule); }
+  .exp-item:nth-child(n+5) { border-bottom: none; }
+  .journey-layout { grid-template-columns: 1fr; }
+  .journey-spine { display: none; }
+  .journey-col, .journey-col--right { padding: 0; padding-top: 0; }
+  .tl-entry::after, .journey-col--right .tl-entry::after { display: none; }
+  .research-top { grid-template-columns: 1fr; gap: 2rem; }
+  .awards-grid { grid-template-columns: 1fr 1fr; }
+  .award-cell:nth-child(3n) { border-right: 1px solid rgba(248,244,238,.07); }
+  .award-cell:nth-child(2n) { border-right: none; }
+  .contact-layout { grid-template-columns: 1fr; gap: 3.5rem; }
+  footer { flex-direction: column; text-align: center; }
+}
+@media (max-width: 680px) {
+  .section { padding: 6rem 0; }
+  .hero { padding: 0 2rem 4rem; }
+  .hero-scroll { display: none; }
+  .nav-list { display: none; }
+  .nav-list.open {
+    display: flex; flex-direction: column;
+    position: absolute; top: 100%; left: 0; width: 100%;
+    background: rgba(245,240,232,.97);
+    padding: 1.5rem 2rem;
+    gap: 1rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav-list.open a { color: var(--warm-gray); }
+  .nav-toggle { display: flex; }
+  .expertise-grid { grid-template-columns: 1fr; }
+  .exp-item { border-right: none; }
+  .awards-grid { grid-template-columns: 1fr; }
+  .award-cell { border-right: none; }
+  .pres-table .pres-loc-cell,
+  .pres-table .pres-venue-cell { display: none; }
+  .mem-band { gap: 1.5rem; }
+  .stat-trio { grid-template-columns: repeat(3,1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ════════════════════════════════════════════ -->
+<nav id="nav">
+  <a href="#top" class="nav-wordmark"><span class="phi-mark phi-mark--nav"><svg viewBox="0 0 200 260" fill="none"><defs><linearGradient id="phiNav" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#C4B8A4"/><stop offset="100%" stop-color="#A89880"/></linearGradient></defs><path d="M100 16C100 16 101 60 100.5 130C100 200 99.5 236 100 244" stroke="url(#phiNav)" stroke-width="2.2" stroke-linecap="round"/><path d="M100 72C138 72 168 94 168 130C168 166 138 188 100 188C62 188 32 166 32 130C32 94 62 72 100 72" stroke="url(#phiNav)" stroke-width="2.8" stroke-linecap="round"/><line x1="92" y1="18" x2="108" y2="18" stroke="#A89880" stroke-width="1" opacity=".45"/><line x1="92" y1="242" x2="108" y2="242" stroke="#A89880" stroke-width="1" opacity=".45"/><line x1="86" y1="101" x2="114" y2="101" stroke="url(#phiNav)" stroke-width=".7"/><path d="M53 155L66 106L79 155" stroke="url(#phiNav)" stroke-width=".9" stroke-linejoin="round"/><line x1="57" y1="140" x2="75" y2="140" stroke="url(#phiNav)" stroke-width=".6"/><path d="M49 155L53 155L53 153" stroke="url(#phiNav)" stroke-width=".5"/><path d="M83 155L79 155L79 153" stroke="url(#phiNav)" stroke-width=".5"/><path d="M121 106L128 155L134 128L140 155L147 106" stroke="url(#phiNav)" stroke-width=".9" stroke-linejoin="round"/><path d="M118 106L121 106L121 108" stroke="url(#phiNav)" stroke-width=".5"/><path d="M150 106L147 106L147 108" stroke="url(#phiNav)" stroke-width=".5"/></svg></span>Alexander T. Wilson<span class="nav-cred">, MD, PhD</span></a>
+  <ul class="nav-list" id="navList">
+    <li><a href="#about">About</a></li>
+    <li><a href="#expertise">Expertise</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ══ HERO ═══════════════════════════════════════════ -->
+<section id="top">
+  <div class="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Facial Plastic &amp; Reconstructive Surgery</p>
+      <h1 class="hero-name">Alexander T. Wilson</h1>
+      <p class="hero-degree">MD &nbsp;·&nbsp; PhD</p>
+      <p class="hero-tagline">Plastic surgery resident at the Hospital of the University of Pennsylvania — advancing plastic surgery through research, teaching, and clinical craft.</p>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ABOUT ══════════════════════════════════════════ -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="about-layout">
+      <div class="reveal">
+        <div class="section-header">
+          <div class="label-with-phi"><span class="phi-mark phi-mark--section"><svg viewBox="15 60 170 140" fill="none"><defs><linearGradient id="phiS1" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#A89880"/><stop offset="100%" stop-color="#8C7B5E"/></linearGradient></defs><path d="M100 16C100 16 101 60 100.5 130C100 200 99.5 236 100 244" stroke="url(#phiS1)" stroke-width="2.2" stroke-linecap="round"/><path d="M100 72C138 72 168 94 168 130C168 166 138 188 100 188C62 188 32 166 32 130C32 94 62 72 100 72" stroke="url(#phiS1)" stroke-width="2.8" stroke-linecap="round"/><line x1="92" y1="18" x2="108" y2="18" stroke="#8C7B5E" stroke-width="1" opacity=".45"/><line x1="92" y1="242" x2="108" y2="242" stroke="#8C7B5E" stroke-width="1" opacity=".45"/><line x1="86" y1="101" x2="114" y2="101" stroke="url(#phiS1)" stroke-width=".7"/><path d="M53 155L66 106L79 155" stroke="url(#phiS1)" stroke-width=".9" stroke-linejoin="round"/><line x1="57" y1="140" x2="75" y2="140" stroke="url(#phiS1)" stroke-width=".6"/><path d="M49 155L53 155L53 153" stroke="url(#phiS1)" stroke-width=".5"/><path d="M83 155L79 155L79 153" stroke="url(#phiS1)" stroke-width=".5"/><path d="M121 106L128 155L134 128L140 155L147 106" stroke="url(#phiS1)" stroke-width=".9" stroke-linejoin="round"/><path d="M118 106L121 106L121 108" stroke="url(#phiS1)" stroke-width=".5"/><path d="M150 106L147 106L147 108" stroke="url(#phiS1)" stroke-width=".5"/></svg></span><p class="label">About</p></div>
+          <h2 class="section-title">Precision, craft, and&nbsp;the art of&nbsp;facial plastic&nbsp;surgery</h2>
+        </div>
+        <p class="about-pull"><em>Timeless aesthetics. Enduring results.</em></p>
+        <p class="body-copy">Dr. Alexander T. Wilson is a resident plastic and reconstructive surgeon, scientist, and author whose work is grounded in a simple conviction: that beautiful outcomes begin with a deep understanding of facial architecture. During his medical training at Yale, he dedicated additional years to earning a doctorate in facial morphology from Erasmus University Rotterdam under the mentorship of renowned craniofacial surgeon Irene Mathijssen — immersing himself in the geometry of the human face, the mathematics of proportion, and the structural principles that define natural harmony. It is a foundation that shapes everything he does in the operating room.
+</p>
+        <p class="body-copy">Dr. Wilson is currently completing his integrated plastic surgery residency at the Hospital of the University of Pennsylvania, where he serves as chief resident. His training spans the full scope of plastic and reconstructive surgery — the face, breast, and body — and he is now accepting cosmetic patients through Penn's chief resident cosmetic clinic. He is actively pursuing fellowship training in aesthetic facial plastic surgery, with a clinical focus on facelift, rhinoplasty, and eyelid surgery.</p>
+        <p class="body-copy">What distinguishes Dr. Wilson's approach is not any single technique, but a deep understanding of facial architecture which allows him to create a bespoke plan for each individual patient. Each consultation begins with careful structural analysis — of proportion, of skeletal foundation, of how a face has changed over time and what it needs to appear refreshed and naturally restored. He believes that surgery planned with precision and patience produces results that are not just beautiful, but enduring — changes that enhance without announcing themselves, that restore without erasing. The commitment to understanding the root cause of facial changes is, for Dr. Wilson, where great surgery begins.</p>
+        <div class="stat-trio">
+          <div class="stat-cell">
+            <div class="stat-n">30<span style="font-size:1.8rem">+</span></div>
+            <div class="stat-l">Publications</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-n">15<span style="font-size:1.8rem">+</span></div>
+            <div class="stat-l">Podium Talks</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-n">6</div>
+            <div class="stat-l">Countries</div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="headshot-wrap">
+          <img src="headshot.jpg" alt="Dr. Alexander T. Wilson, MD, PhD">
+        </div>
+        <div class="credential-stack">
+          <div class="cred-row">
+            <div>
+              <div class="cred-inst">Yale University School of Medicine</div>
+              <div class="cred-degree">Doctor of Medicine, MD</div>
+            </div>
+          </div>
+          <div class="cred-row">
+            <div>
+              <div class="cred-inst">Erasmus University Rotterdam</div>
+              <div class="cred-degree">Doctor of Philosophy, PhD</div>
+              <div class="cred-note">Facial Morphology</div>
+            </div>
+          </div>
+          <div class="cred-row">
+            <div>
+              <div class="cred-inst">Hospital of the University of Pennsylvania</div>
+              <div class="cred-degree">Plastic &amp; Reconstructive Surgery Residency</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EDUCATION MARQUEE ══════════════════════════════ -->
+<div class="marquee-band marquee-band--light">
+  <div class="marquee-track" id="eduMarquee" style="animation-direction: reverse;">
+    <div class="marquee-item"><img src="Yale_logo_t.png" alt="Yale University" style="height:90px;"></div>
+    <div class="marquee-item"><img src="Erasmus_logo_t.png" alt="Erasmus University Rotterdam"></div>
+    <div class="marquee-item"><img src="Penn_logo_t.png" alt="University of Pennsylvania"></div>
+    <div class="marquee-item"><img src="chop_logo_t.png" alt="Children's Hospital of Philadelphia"></div>
+    <!-- duplicate for seamless loop -->
+    <div class="marquee-item"><img src="Yale_logo_t.png" alt="Yale University" style="height:110px;"></div>
+    <div class="marquee-item"><img src="Erasmus_logo_t.png" alt="Erasmus University Rotterdam"></div>
+    <div class="marquee-item"><img src="Penn_logo_t.png" alt="University of Pennsylvania"></div>
+    <div class="marquee-item"><img src="chop_logo_t.png" alt="Children's Hospital of Philadelphia"></div>
+  </div>
+</div>
+
+<!-- ══ INTERLUDE ══════════════════════════════════════ -->
+<div class="interlude">
+  <div class="phi-mark phi-mark--interlude"><svg viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="phiInt" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#C4B8A4"/><stop offset="100%" stop-color="#A89880"/></linearGradient></defs><path d="M100 16C100 16 101 60 100.5 130C100 200 99.5 236 100 244" stroke="url(#phiInt)" stroke-width="2.2" stroke-linecap="round"/><path d="M100 72C138 72 168 94 168 130C168 166 138 188 100 188C62 188 32 166 32 130C32 94 62 72 100 72" stroke="url(#phiInt)" stroke-width="2.8" stroke-linecap="round"/><line x1="92" y1="18" x2="108" y2="18" stroke="#A89880" stroke-width="1" opacity=".45"/><line x1="92" y1="242" x2="108" y2="242" stroke="#A89880" stroke-width="1" opacity=".45"/><line x1="86" y1="101" x2="114" y2="101" stroke="url(#phiInt)" stroke-width=".7"/><path d="M53 155L66 106L79 155" stroke="url(#phiInt)" stroke-width=".9" stroke-linejoin="round"/><line x1="57" y1="140" x2="75" y2="140" stroke="url(#phiInt)" stroke-width=".6"/><path d="M49 155L53 155L53 153" stroke="url(#phiInt)" stroke-width=".5"/><path d="M83 155L79 155L79 153" stroke="url(#phiInt)" stroke-width=".5"/><path d="M121 106L128 155L134 128L140 155L147 106" stroke="url(#phiInt)" stroke-width=".9" stroke-linejoin="round"/><path d="M118 106L121 106L121 108" stroke="url(#phiInt)" stroke-width=".5"/><path d="M150 106L147 106L147 108" stroke="url(#phiInt)" stroke-width=".5"/></svg></div>
+  <p class="interlude-quote">"The intersection of science and artistry defines exceptional surgery — understanding the face deeply enough to reshape it with both precision and restraint."</p>
+  <p class="interlude-attr">Alexander T. Wilson, MD, PhD</p>
+</div>
+
+<!-- ══ EXPERTISE ══════════════════════════════════════ -->
+<section class="section section--alt" id="expertise">
+  <div class="wrap">
+    <div class="section-header reveal">
+      <div class="label-with-phi"><span class="phi-mark phi-mark--section"><svg viewBox="15 60 170 140" fill="none"><defs><linearGradient id="phiS2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#A89880"/><stop offset="100%" stop-color="#8C7B5E"/></linearGradient></defs><path d="M100 16C100 16 101 60 100.5 130C100 200 99.5 236 100 244" stroke="url(#phiS2)" stroke-width="2.2" stroke-linecap="round"/><path d="M100 72C138 72 168 94 168 130C168 166 138 188 100 188C62 188 32 166 32 130C32 94 62 72 100 72" stroke="url(#phiS2)" stroke-width="2.8" stroke-linecap="round"/><line x1="92" y1="18" x2="108" y2="18" stroke="#8C7B5E" stroke-width="1" opacity=".45"/><line x1="92" y1="242" x2="108" y2="242" stroke="#8C7B5E" stroke-width="1" opacity=".45"/><line x1="86" y1="101" x2="114" y2="101" stroke="url(#phiS2)" stroke-width=".7"/><path d="M53 155L66 106L79 155" stroke="url(#phiS2)" stroke-width=".9" stroke-linejoin="round"/><line x1="57" y1="140" x2="75" y2="140" stroke="url(#phiS2)" stroke-width=".6"/><path d="M49 155L53 155L53 153" stroke="url(#phiS2)" stroke-width=".5"/><path d="M83 155L79 155L79 153" stroke="url(#phiS2)" stroke-width=".5"/><path d="M121 106L128 155L134 128L140 155L147 106" stroke="url(#phiS2)" stroke-width=".9" stroke-linejoin="round"/><path d="M118 106L121 106L121 108" stroke="url(#phiS2)" stroke-width=".5"/><path d="M150 106L147 106L147 108" stroke="url(#phiS2)" stroke-width=".5"/></svg></span><p class="label">Clinical Focus</p></div>
+      <h2 class="section-title">Areas of Expertise</h2>
+    </div>
+  </div>
+  <div class="wrap--wide">
+    <div class="expertise-grid exp-border-top" style="border: 1px solid var(--rule);">
+      <div class="exp-item reveal">
+        <div class="exp-num">01</div>
+        <h3 class="exp-title">Rhinoplasty</h3>
+        <p class="exp-body">Primary and revision rhinoplasty with a focus on functional-aesthetic harmony. Author of the Rhinoplasty chapter in McGraw Hill's Cosmetic Surgery textbook. Training in both open and endonasal approaches at Penn.</p>
+      </div>
+      <div class="exp-item reveal reveal-delay-1">
+        <div class="exp-num">02</div>
+        <h3 class="exp-title">Facelift</h3>
+        <p class="exp-body">Comprehensive facial rejuvenation through modern facelift techniques that restore youthful contour while preserving natural expression. Emphasis on deep-plane approaches for lasting, elegant results.</p>
+      </div>
+      <div class="exp-item reveal reveal-delay-2">
+        <div class="exp-num">03</div>
+        <h3 class="exp-title">Necklift</h3>
+        <p class="exp-body">Targeted correction of neck laxity, platysmal banding, and submental fullness to create a refined, defined jawline and cervicomental angle — performed as a standalone procedure or in conjunction with facelift surgery.</p>
+      </div>
+      <div class="exp-item reveal">
+        <div class="exp-num">04</div>
+        <h3 class="exp-title">Blepharoplasty</h3>
+        <p class="exp-body">Upper and lower eyelid surgery to address hooding, puffiness, and under-eye changes. Careful attention to preserving the natural character of the eye while achieving a refreshed, rested appearance.</p>
+      </div>
+      <div class="exp-item reveal reveal-delay-1">
+        <div class="exp-num">05</div>
+        <h3 class="exp-title">Brow Lift</h3>
+        <p class="exp-body">Endoscopic and open brow lift techniques to elevate a descended brow, smooth forehead lines, and restore harmony to the upper face. Tailored to each patient's unique anatomy and aesthetic goals.</p>
+      </div>
+      <div class="exp-item reveal reveal-delay-2">
+        <div class="exp-num">06</div>
+        <h3 class="exp-title">Lip Lift</h3>
+        <p class="exp-body">Precise upper lip shortening procedures to enhance vermilion show, improve lip proportion, and restore a youthful relationship between the nose and upper lip — with meticulous scar placement for discreet healing.</p>
+      </div>
+      <div class="exp-item reveal" style="grid-column: 1 / -1; border-bottom: none;">
+        <div class="exp-num">07</div>
+        <h3 class="exp-title">Non-Invasive Treatments</h3>
+        <p class="exp-body">Evidence-based non-surgical facial rejuvenation including neuromodulators, dermal fillers, and skin resurfacing. Evaluation with 3D imaging quantification to deliver subtle, natural enhancements with minimal downtime.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ RESEARCH ═══════════════════════════════════════ -->
+<section class="section section--alt" id="research">
+  <div class="wrap">
+    <div class="research-top" style="grid-template-columns: 1fr 1.4fr;">
+      <div class="reveal">
+        <div class="label-with-phi"><span class="phi-mark phi-mark--section"><svg viewBox="15 60 170 140" fill="none"><defs><linearGradient id="phiS3" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#A89880"/><stop offset="100%" stop-color="#8C7B5E"/></linearGradient></defs><path d="M100 16C100 16 101 60 100.5 130C100 200 99.5 236 100 244" stroke="url(#phiS3)" stroke-width="2.2" stroke-linecap="round"/><path d="M100 72C138 72 168 94 168 130C168 166 138 188 100 188C62 188 32 166 32 130C32 94 62 72 100 72" stroke="url(#phiS3)" stroke-width="2.8" stroke-linecap="round"/><line x1="92" y1="18" x2="108" y2="18" stroke="#8C7B5E" stroke-width="1" opacity=".45"/><line x1="92" y1="242" x2="108" y2="242" stroke="#8C7B5E" stroke-width="1" opacity=".45"/><line x1="86" y1="101" x2="114" y2="101" stroke="url(#phiS3)" stroke-width=".7"/><path d="M53 155L66 106L79 155" stroke="url(#phiS3)" stroke-width=".9" stroke-linejoin="round"/><line x1="57" y1="140" x2="75" y2="140" stroke="url(#phiS3)" stroke-width=".6"/><path d="M49 155L53 155L53 153" stroke="url(#phiS3)" stroke-width=".5"/><path d="M83 155L79 155L79 153" stroke="url(#phiS3)" stroke-width=".5"/><path d="M121 106L128 155L134 128L140 155L147 106" stroke="url(#phiS3)" stroke-width=".9" stroke-linejoin="round"/><path d="M118 106L121 106L121 108" stroke="url(#phiS3)" stroke-width=".5"/><path d="M150 106L147 106L147 108" stroke="url(#phiS3)" stroke-width=".5"/></svg></span><p class="label">Scholarship</p></div>
+        <h2 class="section-title">Research &amp; Publications</h2>
+        <p class="body-copy" style="margin-top:1.5rem;">30+ peer-reviewed publications spanning craniofacial surgery, facial aesthetics, cleft care, and orthognathic surgery — with contributions to journals including Plastic &amp; Reconstructive Surgery, Developmental Medicine &amp; Child Neurology, and Scientific Reports.</p>
+      </div>
+      <div class="reveal reveal-delay-2">
+          <div class="pub-entry">
+            <p class="pub-title">Rhinoplasty</p>
+            <p class="pub-meta">Cosmetic Surgery — McGraw Hill (In Press)</p>
+            <p class="pub-year">Wilson AT, Percec I — Textbook Chapter</p>
+          </div>
+          <div class="pub-entry">
+            <p class="pub-title">Multimodal Pilot Evaluation of a Hyaluronic Acid Infraorbital Filler using 3D Imaging Quantification and Patient Reported Outcomes</p>
+            <p class="pub-meta">Aesthetic Surgery Journal Open Forum, 2024</p>
+            <p class="pub-year">Honig SE, Toyoda Y, Ewing JN, … Wilson AT, Broach RB, Percec I</p>
+          </div>
+          <div class="pub-entry">
+            <p class="pub-title">Cerebral cortex maldevelopment in syndromic craniosynostosis: an allometric study</p>
+            <p class="pub-meta">Developmental Medicine &amp; Child Neurology, 2022</p>
+            <p class="pub-year">Wilson AT, den Ottelander BK, van Veelen MLC, et al.</p>
+          </div>
+          <div class="pub-entry">
+            <p class="pub-title">Orbital and Periorbital Dysmorphology in Untreated Pfeiffer Syndrome</p>
+            <p class="pub-meta">Plastic &amp; Reconstructive Surgery, 2022</p>
+            <p class="pub-year">Lu X, Forte AJ, Allam O, Park EK, Wilson AT, et al.</p>
+          </div>
+          <div class="pub-entry">
+            <p class="pub-title">Disappointing results of spring-assisted cranial vault expansion in Crouzon patients with sagittal synostosis</p>
+            <p class="pub-meta">Neurosurgical Focus, 2021</p>
+            <p class="pub-year">Wilson AT, Gaillard L, Versnel SL, et al.</p>
+          </div>
+          <div class="pub-entry">
+            <p class="pub-title">Staged Abbe-Rhinoplasty Technique to Correct Bilateral Cleft Deformity</p>
+            <p class="pub-meta">Plastic &amp; Reconstructive Surgery, 2020</p>
+            <p class="pub-year">Veeramani A, Wilson AT, Saw-Martinez R, Steinbacher DM</p>
+          </div>
+          <div class="pub-entry">
+            <p class="pub-title">Intracranial Hypertension and Cortical Thickness in Syndromic Craniosynostosis</p>
+            <p class="pub-meta">Developmental Medicine &amp; Child Neurology, 2020</p>
+            <p class="pub-year">Wilson AT, den Ottelander BK, de Goederen R, et al.</p>
+          </div>
+          <div class="pub-entry">
+            <p class="pub-title">Conformity of the Actual to Planned Result in Orthognathic Surgery</p>
+            <p class="pub-meta">Plastic &amp; Reconstructive Surgery, 2019</p>
+            <p class="pub-year">Wilson AT, Gabrick K, Wu RT, Madari S, et al.</p>
+          </div>
+          <div class="pub-entry">
+            <p class="pub-title">A Machine Learning Framework for Automated Diagnosis and Computer Assisted Planning in Plastic Surgery</p>
+            <p class="pub-meta">Scientific Reports, 2019</p>
+            <p class="pub-year">Knoops PGM, Pappaioannou A, … Wilson AT, et al.</p>
+          </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══ MEMBERSHIPS MARQUEE ════════════════════════════ -->
+<div class="marquee-band marquee-band--dark">
+  <div class="marquee-track" id="memMarquee" style="animation-duration: 45s;">
+    <div class="marquee-item"><img src="AAFPRS.png" alt="AAFPRS"><span>American Association of Facial Plastic &amp; Reconstructive Surgeons</span></div>
+    <div class="marquee-item"><img src="ASPS.png" alt="ASPS"><span>American Society of Plastic Surgeons</span></div>
+    <div class="marquee-item"><img src="ASMS.png" alt="ASMS"><span>American Society of Maxillofacial Surgeons</span></div>
+    <div class="marquee-item"><img src="ASAPS.png" alt="ASAPS"><span>American Society for Aesthetic Plastic Surgery</span></div>
+    <div class="marquee-item"><img src="ACS.png" alt="ACS"><span>American College of Surgeons</span></div>
+    <!-- duplicate for seamless loop -->
+    <div class="marquee-item"><img src="AAFPRS.png" alt="AAFPRS"><span>American Association of Facial Plastic &amp; Reconstructive Surgeons</span></div>
+    <div class="marquee-item"><img src="ASPS.png" alt="ASPS"><span>American Society of Plastic Surgeons</span></div>
+    <div class="marquee-item"><img src="ASMS.png" alt="ASMS"><span>American Society of Maxillofacial Surgeons</span></div>
+    <div class="marquee-item"><img src="ASAPS.png" alt="ASAPS"><span>American Society for Aesthetic Plastic Surgery</span></div>
+    <div class="marquee-item"><img src="ACS.png" alt="ACS"><span>American College of Surgeons</span></div>
+  </div>
+</div>
+
+<!-- ══ CONTACT ════════════════════════════════════════ -->
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="contact-layout">
+      <div class="reveal">
+        <div class="label-with-phi"><span class="phi-mark phi-mark--section"><svg viewBox="15 60 170 140" fill="none"><defs><linearGradient id="phiS4" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#A89880"/><stop offset="100%" stop-color="#8C7B5E"/></linearGradient></defs><path d="M100 16C100 16 101 60 100.5 130C100 200 99.5 236 100 244" stroke="url(#phiS4)" stroke-width="2.2" stroke-linecap="round"/><path d="M100 72C138 72 168 94 168 130C168 166 138 188 100 188C62 188 32 166 32 130C32 94 62 72 100 72" stroke="url(#phiS4)" stroke-width="2.8" stroke-linecap="round"/><line x1="92" y1="18" x2="108" y2="18" stroke="#8C7B5E" stroke-width="1" opacity=".45"/><line x1="92" y1="242" x2="108" y2="242" stroke="#8C7B5E" stroke-width="1" opacity=".45"/><line x1="86" y1="101" x2="114" y2="101" stroke="url(#phiS4)" stroke-width=".7"/><path d="M53 155L66 106L79 155" stroke="url(#phiS4)" stroke-width=".9" stroke-linejoin="round"/><line x1="57" y1="140" x2="75" y2="140" stroke="url(#phiS4)" stroke-width=".6"/><path d="M49 155L53 155L53 153" stroke="url(#phiS4)" stroke-width=".5"/><path d="M83 155L79 155L79 153" stroke="url(#phiS4)" stroke-width=".5"/><path d="M121 106L128 155L134 128L140 155L147 106" stroke="url(#phiS4)" stroke-width=".9" stroke-linejoin="round"/><path d="M118 106L121 106L121 108" stroke="url(#phiS4)" stroke-width=".5"/><path d="M150 106L147 106L147 108" stroke="url(#phiS4)" stroke-width=".5"/></svg></span><p class="label">Contact</p></div>
+        <h2 class="contact-lead">Research collaborations, speaking engagements, and educational inquiries are welcome.</h2>
+        <div class="contact-details" style="margin-top: 2.5rem;">
+        </div>
+      </div>
+      <form class="reveal reveal-delay-2" onsubmit="event.preventDefault(); this.innerHTML='<p style=\'font-family:var(--serif);font-size:1.2rem;color:var(--bronze);padding:2rem 0;\'>Thank you — I\'ll be in touch.</p>'">
+        <div class="form-field">
+          <label for="c-name">Name</label>
+          <input type="text" id="c-name" placeholder="Your full name" required>
+        </div>
+        <div class="form-field">
+          <label for="c-email">Email</label>
+          <input type="email" id="c-email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-field">
+          <label for="c-subj">Subject</label>
+          <input type="text" id="c-subj" placeholder="Research, speaking, education…">
+        </div>
+        <div class="form-field">
+          <label for="c-msg">Message</label>
+          <textarea id="c-msg" placeholder="Your message" required></textarea>
+        </div>
+        <button type="submit" class="btn-send">Send Message &rarr;</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ════════════════════════════════════════ -->
+<footer>
+  <p class="foot-brand"><span class="phi-mark phi-mark--footer"><svg viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="phiFoot" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#C4B8A4"/><stop offset="100%" stop-color="#A89880"/></linearGradient></defs><path d="M100 16C100 16 101 60 100.5 130C100 200 99.5 236 100 244" stroke="url(#phiFoot)" stroke-width="2.2" stroke-linecap="round"/><path d="M100 72C138 72 168 94 168 130C168 166 138 188 100 188C62 188 32 166 32 130C32 94 62 72 100 72" stroke="url(#phiFoot)" stroke-width="2.8" stroke-linecap="round"/><line x1="92" y1="18" x2="108" y2="18" stroke="#A89880" stroke-width="1" opacity=".45"/><line x1="92" y1="242" x2="108" y2="242" stroke="#A89880" stroke-width="1" opacity=".45"/><line x1="86" y1="101" x2="114" y2="101" stroke="url(#phiFoot)" stroke-width=".7"/><path d="M53 155L66 106L79 155" stroke="url(#phiFoot)" stroke-width=".9" stroke-linejoin="round"/><line x1="57" y1="140" x2="75" y2="140" stroke="url(#phiFoot)" stroke-width=".6"/><path d="M49 155L53 155L53 153" stroke="url(#phiFoot)" stroke-width=".5"/><path d="M83 155L79 155L79 153" stroke="url(#phiFoot)" stroke-width=".5"/><path d="M121 106L128 155L134 128L140 155L147 106" stroke="url(#phiFoot)" stroke-width=".9" stroke-linejoin="round"/><path d="M118 106L121 106L121 108" stroke="url(#phiFoot)" stroke-width=".5"/><path d="M150 106L147 106L147 108" stroke="url(#phiFoot)" stroke-width=".5"/></svg></span> Alexander T. Wilson, MD, PhD</p>
+  <p class="foot-copy">Facial Plastic &amp; Reconstructive Surgery · Philadelphia, PA</p>
+</footer>
+
+<!-- ══ JS ════════════════════════════════════════════ -->
+<script>
+// Nav pinning
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('pinned', window.scrollY > 60);
+}, { passive: true });
+
+// Mobile nav
+document.getElementById('navToggle').addEventListener('click', () => {
+  document.getElementById('navList').classList.toggle('open');
+});
+document.querySelectorAll('#navList a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('navList').classList.remove('open'));
+});
+
+// Scroll reveal
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
