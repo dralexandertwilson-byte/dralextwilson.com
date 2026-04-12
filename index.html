@@ -733,22 +733,43 @@ footer {
 }
 
 /* ── Phi Mark ──────────────────────────────────────── */
-.phi-mark { display: inline-block; vertical-align: middle; }
-.phi-mark--nav { opacity: .85; transition: opacity .3s; margin-right: .25rem; }
-#nav.pinned .phi-mark--nav { opacity: 1; }
-.phi-mark--nav svg { width: 16px; height: 21px; }
-.phi-mark--section { opacity: .7; margin-right: .6rem; }
-.phi-mark--section svg { width: 14px; height: 14px; }
+.phi {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--bronze);
+  line-height: 1;
+}
+.phi--nav {
+  font-size: 1.3rem;
+  margin-right: .3rem;
+  opacity: .85;
+  transition: opacity .3s;
+}
+#nav.pinned .phi--nav { opacity: 1; }
+.phi--section {
+  font-size: 1rem;
+  margin-right: .5rem;
+  opacity: .7;
+}
 .label-with-phi {
   display: flex;
   align-items: center;
   margin-bottom: 1.2rem;
 }
 .label-with-phi .label { margin-bottom: 0; }
-.phi-mark--interlude { opacity: .65; margin-bottom: 2rem; }
-.phi-mark--interlude svg { width: 32px; height: 42px; }
-.phi-mark--footer { opacity: .85; }
-.phi-mark--footer svg { width: 24px; height: 32px; }
+.phi--interlude {
+  font-size: 2.4rem;
+  opacity: .35;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+.phi--footer {
+  font-size: 1.2rem;
+  opacity: .65;
+  margin-right: .5rem;
+  color: var(--bronze-light);
+}
 
 /* ══ FADE-IN ════════════════════════════════════════ */
 .reveal {
@@ -812,7 +833,7 @@ footer {
 
 <!-- ══ NAV ════════════════════════════════════════════ -->
 <nav id="nav">
-  <a href="#top" class="nav-wordmark"><span class="phi-mark phi-mark--nav"><svg viewBox="0 0 200 260" fill="none"><defs><linearGradient id="phiNav" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#C4B8A4"/><stop offset="100%" stop-color="#A89880"/></linearGradient></defs><path d="M100 16C100 16 101 60 100.5 130C100 200 99.5 236 100 244" stroke="url(#phiNav)" stroke-width="2.2" stroke-linecap="round"/><path d="M100 72C138 72 168 94 168 130C168 166 138 188 100 188C62 188 32 166 32 130C32 94 62 72 100 72" stroke="url(#phiNav)" stroke-width="2.8" stroke-linecap="round"/><line x1="92" y1="18" x2="108" y2="18" stroke="#A89880" stroke-width="1" opacity=".45"/><line x1="92" y1="242" x2="108" y2="242" stroke="#A89880" stroke-width="1" opacity=".45"/><line x1="86" y1="101" x2="114" y2="101" stroke="url(#phiNav)" stroke-width=".7"/><path d="M53 155L66 106L79 155" stroke="url(#phiNav)" stroke-width=".9" stroke-linejoin="round"/><line x1="57" y1="140" x2="75" y2="140" stroke="url(#phiNav)" stroke-width=".6"/><path d="M49 155L53 155L53 153" stroke="url(#phiNav)" stroke-width=".5"/><path d="M83 155L79 155L79 153" stroke="url(#phiNav)" stroke-width=".5"/><path d="M121 106L128 155L134 128L140 155L147 106" stroke="url(#phiNav)" stroke-width=".9" stroke-linejoin="round"/><path d="M118 106L121 106L121 108" stroke="url(#phiNav)" stroke-width=".5"/><path d="M150 106L147 106L147 108" stroke="url(#phiNav)" stroke-width=".5"/></svg></span>Alexander T. Wilson<span class="nav-cred">, MD, PhD</span></a>
+  <a href="#top" class="nav-wordmark"><span class="phi phi--nav">&#966;</span>Alexander T. Wilson<span class="nav-cred">, MD, PhD</span></a>
   <ul class="nav-list" id="navList">
     <li><a href="#about">About</a></li>
     <li><a href="#expertise">Expertise</a></li>
@@ -845,7 +866,7 @@ footer {
     <div class="about-layout">
       <div class="reveal">
         <div class="section-header">
-          <div class="label-with-phi"><span class="phi-mark phi-mark--section"><svg viewBox="15 60 170 140" fill="none"><defs><linearGradient id="phiS1" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#A89880"/><stop offset="100%" stop-color="#8C7B5E"/></linearGradient></defs><path d="M100 16C100 16 101 60 100.5 130C100 200 99.5 236 100 244" stroke="url(#phiS1)" stroke-width="2.2" stroke-linecap="round"/><path d="M100 72C138 72 168 94 168 130C168 166 138 188 100 188C62 188 32 166 32 130C32 94 62 72 100 72" stroke="url(#phiS1)" stroke-width="2.8" stroke-linecap="round"/><line x1="92" y1="18" x2="108" y2="18" stroke="#8C7B5E" stroke-width="1" opacity=".45"/><line x1="92" y1="242" x2="108" y2="242" stroke="#8C7B5E" stroke-width="1" opacity=".45"/><line x1="86" y1="101" x2="114" y2="101" stroke="url(#phiS1)" stroke-width=".7"/><path d="M53 155L66 106L79 155" stroke="url(#phiS1)" stroke-width=".9" stroke-linejoin="round"/><line x1="57" y1="140" x2="75" y2="140" stroke="url(#phiS1)" stroke-width=".6"/><path d="M49 155L53 155L53 153" stroke="url(#phiS1)" stroke-width=".5"/><path d="M83 155L79 155L79 153" stroke="url(#phiS1)" stroke-width=".5"/><path d="M121 106L128 155L134 128L140 155L147 106" stroke="url(#phiS1)" stroke-width=".9" stroke-linejoin="round"/><path d="M118 106L121 106L121 108" stroke="url(#phiS1)" stroke-width=".5"/><path d="M150 106L147 106L147 108" stroke="url(#phiS1)" stroke-width=".5"/></svg></span><p class="label">About</p></div>
+          <div class="label-with-phi"><span class="phi phi--section">&#966;</span><p class="label">About</p></div>
           <h2 class="section-title">Precision, craft, and&nbsp;the art of&nbsp;facial plastic&nbsp;surgery</h2>
         </div>
         <p class="about-pull"><em>Timeless aesthetics. Enduring results.</em></p>
@@ -915,7 +936,7 @@ footer {
 
 <!-- ══ INTERLUDE ══════════════════════════════════════ -->
 <div class="interlude">
-  <div class="phi-mark phi-mark--interlude"><svg viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="phiInt" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#C4B8A4"/><stop offset="100%" stop-color="#A89880"/></linearGradient></defs><path d="M100 16C100 16 101 60 100.5 130C100 200 99.5 236 100 244" stroke="url(#phiInt)" stroke-width="2.2" stroke-linecap="round"/><path d="M100 72C138 72 168 94 168 130C168 166 138 188 100 188C62 188 32 166 32 130C32 94 62 72 100 72" stroke="url(#phiInt)" stroke-width="2.8" stroke-linecap="round"/><line x1="92" y1="18" x2="108" y2="18" stroke="#A89880" stroke-width="1" opacity=".45"/><line x1="92" y1="242" x2="108" y2="242" stroke="#A89880" stroke-width="1" opacity=".45"/><line x1="86" y1="101" x2="114" y2="101" stroke="url(#phiInt)" stroke-width=".7"/><path d="M53 155L66 106L79 155" stroke="url(#phiInt)" stroke-width=".9" stroke-linejoin="round"/><line x1="57" y1="140" x2="75" y2="140" stroke="url(#phiInt)" stroke-width=".6"/><path d="M49 155L53 155L53 153" stroke="url(#phiInt)" stroke-width=".5"/><path d="M83 155L79 155L79 153" stroke="url(#phiInt)" stroke-width=".5"/><path d="M121 106L128 155L134 128L140 155L147 106" stroke="url(#phiInt)" stroke-width=".9" stroke-linejoin="round"/><path d="M118 106L121 106L121 108" stroke="url(#phiInt)" stroke-width=".5"/><path d="M150 106L147 106L147 108" stroke="url(#phiInt)" stroke-width=".5"/></svg></div>
+  <span class="phi phi--interlude">&#966;</span>
   <p class="interlude-quote">"The intersection of science and artistry defines exceptional surgery — understanding the face deeply enough to reshape it with both precision and restraint."</p>
   <p class="interlude-attr">Alexander T. Wilson, MD, PhD</p>
 </div>
@@ -924,7 +945,7 @@ footer {
 <section class="section section--alt" id="expertise">
   <div class="wrap">
     <div class="section-header reveal">
-      <div class="label-with-phi"><span class="phi-mark phi-mark--section"><svg viewBox="15 60 170 140" fill="none"><defs><linearGradient id="phiS2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#A89880"/><stop offset="100%" stop-color="#8C7B5E"/></linearGradient></defs><path d="M100 16C100 16 101 60 100.5 130C100 200 99.5 236 100 244" stroke="url(#phiS2)" stroke-width="2.2" stroke-linecap="round"/><path d="M100 72C138 72 168 94 168 130C168 166 138 188 100 188C62 188 32 166 32 130C32 94 62 72 100 72" stroke="url(#phiS2)" stroke-width="2.8" stroke-linecap="round"/><line x1="92" y1="18" x2="108" y2="18" stroke="#8C7B5E" stroke-width="1" opacity=".45"/><line x1="92" y1="242" x2="108" y2="242" stroke="#8C7B5E" stroke-width="1" opacity=".45"/><line x1="86" y1="101" x2="114" y2="101" stroke="url(#phiS2)" stroke-width=".7"/><path d="M53 155L66 106L79 155" stroke="url(#phiS2)" stroke-width=".9" stroke-linejoin="round"/><line x1="57" y1="140" x2="75" y2="140" stroke="url(#phiS2)" stroke-width=".6"/><path d="M49 155L53 155L53 153" stroke="url(#phiS2)" stroke-width=".5"/><path d="M83 155L79 155L79 153" stroke="url(#phiS2)" stroke-width=".5"/><path d="M121 106L128 155L134 128L140 155L147 106" stroke="url(#phiS2)" stroke-width=".9" stroke-linejoin="round"/><path d="M118 106L121 106L121 108" stroke="url(#phiS2)" stroke-width=".5"/><path d="M150 106L147 106L147 108" stroke="url(#phiS2)" stroke-width=".5"/></svg></span><p class="label">Clinical Focus</p></div>
+      <div class="label-with-phi"><span class="phi phi--section">&#966;</span><p class="label">Clinical Focus</p></div>
       <h2 class="section-title">Areas of Expertise</h2>
     </div>
   </div>
@@ -975,7 +996,7 @@ footer {
   <div class="wrap">
     <div class="research-top" style="grid-template-columns: 1fr 1.4fr;">
       <div class="reveal">
-        <div class="label-with-phi"><span class="phi-mark phi-mark--section"><svg viewBox="15 60 170 140" fill="none"><defs><linearGradient id="phiS3" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#A89880"/><stop offset="100%" stop-color="#8C7B5E"/></linearGradient></defs><path d="M100 16C100 16 101 60 100.5 130C100 200 99.5 236 100 244" stroke="url(#phiS3)" stroke-width="2.2" stroke-linecap="round"/><path d="M100 72C138 72 168 94 168 130C168 166 138 188 100 188C62 188 32 166 32 130C32 94 62 72 100 72" stroke="url(#phiS3)" stroke-width="2.8" stroke-linecap="round"/><line x1="92" y1="18" x2="108" y2="18" stroke="#8C7B5E" stroke-width="1" opacity=".45"/><line x1="92" y1="242" x2="108" y2="242" stroke="#8C7B5E" stroke-width="1" opacity=".45"/><line x1="86" y1="101" x2="114" y2="101" stroke="url(#phiS3)" stroke-width=".7"/><path d="M53 155L66 106L79 155" stroke="url(#phiS3)" stroke-width=".9" stroke-linejoin="round"/><line x1="57" y1="140" x2="75" y2="140" stroke="url(#phiS3)" stroke-width=".6"/><path d="M49 155L53 155L53 153" stroke="url(#phiS3)" stroke-width=".5"/><path d="M83 155L79 155L79 153" stroke="url(#phiS3)" stroke-width=".5"/><path d="M121 106L128 155L134 128L140 155L147 106" stroke="url(#phiS3)" stroke-width=".9" stroke-linejoin="round"/><path d="M118 106L121 106L121 108" stroke="url(#phiS3)" stroke-width=".5"/><path d="M150 106L147 106L147 108" stroke="url(#phiS3)" stroke-width=".5"/></svg></span><p class="label">Scholarship</p></div>
+        <div class="label-with-phi"><span class="phi phi--section">&#966;</span><p class="label">Scholarship</p></div>
         <h2 class="section-title">Research &amp; Publications</h2>
         <p class="body-copy" style="margin-top:1.5rem;">30+ peer-reviewed publications spanning craniofacial surgery, facial aesthetics, cleft care, and orthognathic surgery — with contributions to journals including Plastic &amp; Reconstructive Surgery, Developmental Medicine &amp; Child Neurology, and Scientific Reports.</p>
       </div>
@@ -1054,7 +1075,7 @@ footer {
   <div class="wrap">
     <div class="contact-layout">
       <div class="reveal">
-        <div class="label-with-phi"><span class="phi-mark phi-mark--section"><svg viewBox="15 60 170 140" fill="none"><defs><linearGradient id="phiS4" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#A89880"/><stop offset="100%" stop-color="#8C7B5E"/></linearGradient></defs><path d="M100 16C100 16 101 60 100.5 130C100 200 99.5 236 100 244" stroke="url(#phiS4)" stroke-width="2.2" stroke-linecap="round"/><path d="M100 72C138 72 168 94 168 130C168 166 138 188 100 188C62 188 32 166 32 130C32 94 62 72 100 72" stroke="url(#phiS4)" stroke-width="2.8" stroke-linecap="round"/><line x1="92" y1="18" x2="108" y2="18" stroke="#8C7B5E" stroke-width="1" opacity=".45"/><line x1="92" y1="242" x2="108" y2="242" stroke="#8C7B5E" stroke-width="1" opacity=".45"/><line x1="86" y1="101" x2="114" y2="101" stroke="url(#phiS4)" stroke-width=".7"/><path d="M53 155L66 106L79 155" stroke="url(#phiS4)" stroke-width=".9" stroke-linejoin="round"/><line x1="57" y1="140" x2="75" y2="140" stroke="url(#phiS4)" stroke-width=".6"/><path d="M49 155L53 155L53 153" stroke="url(#phiS4)" stroke-width=".5"/><path d="M83 155L79 155L79 153" stroke="url(#phiS4)" stroke-width=".5"/><path d="M121 106L128 155L134 128L140 155L147 106" stroke="url(#phiS4)" stroke-width=".9" stroke-linejoin="round"/><path d="M118 106L121 106L121 108" stroke="url(#phiS4)" stroke-width=".5"/><path d="M150 106L147 106L147 108" stroke="url(#phiS4)" stroke-width=".5"/></svg></span><p class="label">Contact</p></div>
+        <div class="label-with-phi"><span class="phi phi--section">&#966;</span><p class="label">Contact</p></div>
         <h2 class="contact-lead">Research collaborations, speaking engagements, and educational inquiries are welcome.</h2>
         <div class="contact-details" style="margin-top: 2.5rem;">
         </div>
@@ -1084,7 +1105,7 @@ footer {
 
 <!-- ══ FOOTER ════════════════════════════════════════ -->
 <footer>
-  <p class="foot-brand"><span class="phi-mark phi-mark--footer"><svg viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="phiFoot" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#C4B8A4"/><stop offset="100%" stop-color="#A89880"/></linearGradient></defs><path d="M100 16C100 16 101 60 100.5 130C100 200 99.5 236 100 244" stroke="url(#phiFoot)" stroke-width="2.2" stroke-linecap="round"/><path d="M100 72C138 72 168 94 168 130C168 166 138 188 100 188C62 188 32 166 32 130C32 94 62 72 100 72" stroke="url(#phiFoot)" stroke-width="2.8" stroke-linecap="round"/><line x1="92" y1="18" x2="108" y2="18" stroke="#A89880" stroke-width="1" opacity=".45"/><line x1="92" y1="242" x2="108" y2="242" stroke="#A89880" stroke-width="1" opacity=".45"/><line x1="86" y1="101" x2="114" y2="101" stroke="url(#phiFoot)" stroke-width=".7"/><path d="M53 155L66 106L79 155" stroke="url(#phiFoot)" stroke-width=".9" stroke-linejoin="round"/><line x1="57" y1="140" x2="75" y2="140" stroke="url(#phiFoot)" stroke-width=".6"/><path d="M49 155L53 155L53 153" stroke="url(#phiFoot)" stroke-width=".5"/><path d="M83 155L79 155L79 153" stroke="url(#phiFoot)" stroke-width=".5"/><path d="M121 106L128 155L134 128L140 155L147 106" stroke="url(#phiFoot)" stroke-width=".9" stroke-linejoin="round"/><path d="M118 106L121 106L121 108" stroke="url(#phiFoot)" stroke-width=".5"/><path d="M150 106L147 106L147 108" stroke="url(#phiFoot)" stroke-width=".5"/></svg></span> Alexander T. Wilson, MD, PhD</p>
+  <p class="foot-brand"><span class="phi phi--footer">&#966;</span> Alexander T. Wilson, MD, PhD</p>
   <p class="foot-copy">Facial Plastic &amp; Reconstructive Surgery · Philadelphia, PA</p>
 </footer>
 
